@@ -29,14 +29,12 @@
                     <tr><td><label for="inputPassword">Password: </label></td><td><input type="password" name="inputPassword" ></td></tr>
                     <tr><td><label for="selectRole"></label></td>
                         <td>
-                            
-                                <select name="selectRole">
-                                    <option>Select Role</option>
-                                    <c:forEach var="role" items="${roles}">
+                            <select name="selectRole">
+                                <option>Select Role</option>
+                                <c:forEach var="role" items="${roles}">
                                     <option>${role.name}</option>
-                                    </c:forEach>
-                                </select>
-                            
+                                </c:forEach>
+                            </select>
                         </td>
                     </tr>
                 </table>
@@ -98,7 +96,7 @@
                 </table>
                 <button type="submit">Submit</button>
             </form>
-            
+
             
         </div> 
     </body>

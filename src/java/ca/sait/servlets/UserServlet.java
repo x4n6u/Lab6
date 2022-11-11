@@ -9,6 +9,7 @@ import ca.sait.models.User;
 import ca.sait.services.RoleService;
 import ca.sait.services.UserService;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,10 +42,6 @@ public class UserServlet extends HttpServlet {
         String editLastName = "";
       
         
-        
-        
-        
-        
         List<User> users;
         List<Role> roles;
         try {
@@ -56,14 +53,10 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("roles", roles);
             
             String action = request.getParameter("action");
+            
             if (action != null && action.equals("delete")) {
-            String userEmail = request.getParameter("user").replaceAll(" ", "+");
-            
-            
+                String userEmail = request.getParameter("user").replaceAll(" ", "+");
                 UserService.delete(userEmail);
-
-                response.sendRedirect("user");
-                request.getSession().invalidate();
             }
             else if(action != null && action.equals("edit"))
             {
@@ -76,23 +69,20 @@ public class UserServlet extends HttpServlet {
                     {
                         emailToEdit = users.get(x).getEmail();
                         editFirstName = users.get(x).getFirstName();
-                        editLastName = users.get(x).getLastName();
+                        editLastName = users.get(x).getLastName();  
                     }
                 }
             }
-            
-            
-            
-            
             request.setAttribute("emailToEdit", emailToEdit);
             request.setAttribute("editFirstName", editFirstName);
             request.setAttribute("editLastName", editLastName);
-            this.getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
+            
         } catch (Exception ex) {
             Logger.getLogger(UserServlet.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("---Error---");
         }
         
+        this.getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
     }
 
     /**
